@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhisperMask // Ultrasonic Privacy Shield</title>
+    
+    <!-- Meta tags for SEO & App styling -->
+    <meta name="description" content="WhisperMask generates an invisible ultrasonic privacy bubble that blindingly disrupts always-listening microphones and voice assistants using engineered, inaudible acoustic frequencies.">
+    <meta name="theme-color" content="#0a0b0d">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <!-- Local Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Background overlay elements for cyberpunk grid and glow effects -->
+    <div class="grid-overlay"></div>
+    <div class="glow-orb glow-orb-cyan"></div>
+    <div class="glow-orb glow-orb-magenta"></div>
+
+    <div class="app-container">
+        <!-- HEADER -->
+        <header class="app-header">
+            <div class="brand">
+                <div class="logo-icon">🛡️</div>
+                <div class="logo-text">
+                    <h1>WHISPER<span>MASK</span></h1>
+                    <p class="subtitle">ULTRASONIC ACOUSTIC DEFENSE LAYER</p>
+                </div>
+            </div>
+            
+            <div class="system-status-container">
+                <div class="status-indicator">
+                    <span class="status-pulse-dot" id="status-dot"></span>
+                    <span class="status-label" id="status-text">SHIELD DEACTIVATED</span>
+                </div>
+                <div class="system-telemetry">
+                    <span class="telemetry-item">LATENCY: <strong id="telemetry-latency">0.0ms</strong></span>
+                    <span class="telemetry-item">BATTERY: <strong id="telemetry-battery">--%</strong></span>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN LAYOUT -->
+        <main class="dashboard-grid">
+            
+            <!-- LEFT PANEL: CENTRAL SHIELD CONTROL & AUDIO ENGINE SETTINGS -->
+            <section class="panel-card main-controls-panel">
+                <div class="panel-header">
+                    <h2>CORE SHIELD CONTROL</h2>
+                    <span class="panel-tag">DSP ENGINE v1.2</span>
+                </div>
+                <div class="panel-body flex-center-col">
+                    
+                    <!-- Giant Engage Button -->
+                    <button class="shield-toggle-btn" id="shield-toggle" aria-label="Engage Ultrasonic Guard">
+                        <div class="btn-ripple"></div>
+                        <div class="btn-content">
+                            <span class="shield-icon" id="shield-icon">🛡️</span>
+                            <span class="btn-status-sub" id="shield-btn-sub">TAP TO ACTIVATE</span>
+                            <span class="btn-status-main" id="shield-btn-main">ENGAGE</span>
+                        </div>
+                    </button>
+
+                    <!-- Core Control Inputs -->
+                    <div class="control-group">
+                        <div class="slider-header">
+                            <label for="freq-slider">ULTRASONIC CARRIER FREQUENCY</label>
+                            <span class="slider-val" id="freq-val">19.00 kHz</span>
+                        </div>
+                        <input type="range" id="freq-slider" min="18000" max="22000" step="100" value="19000" class="neon-slider" disabled>
+                        <div class="slider-labels">
+                            <span>18.0 kHz (HEARABLE TO PETS)</span>
+                            <span>22.0 kHz (MAX MICROPHONE LIMIT)</span>
+                        </div>
+                    </div>
+
+                    <div class="control-row">
+                        <div class="control-group half-width">
+                            <div class="slider-header">
+                                <label for="perturb-slider">GAN PERTURBATION depth</label>
+                                <span class="slider-val" id="perturb-val">40%</span>
+                            </div>
+                            <input type="range" id="perturb-slider" min="0" max="100" step="5" value="40" class="neon-slider" disabled>
+                        </div>
+                        <div class="control-group half-width">
+                            <div class="slider-header">
+                                <label for="noise-type">PERTURBATION WAVE</label>
+                            </div>
+                            <select id="noise-type" class="neon-select" disabled>
+                                <option value="modulated-sine">Modulated Sine (Dynamic)</option>
+                                <option value="dual-tone">Multi-Frequency Carrier</option>
+                                <option value="adversarial-noise">ASR Decision Noise</option>
+                                <option value="pink-masking">Psychoacoustic Pink</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Live Hardware Diagnostic Grid -->
+                    <div class="diagnostic-grid">
+                        <div class="diag-item">
+                            <span class="diag-label">AUDIO SOURCE</span>
+                            <span class="diag-val text-cyan" id="diag-audio-source">SYSTEM DEFAULT</span>
+                        </div>
+                        <div class="diag-item">
+                            <span class="diag-label">OUTPUT PRESSURE</span>
+                            <span class="diag-val text-magenta" id="diag-db-output">0.0 dB SPL</span>
+                        </div>
+                        <div class="diag-item">
+                            <span class="diag-label">MIC FEEDBACK</span>
+                            <div class="mic-toggle-wrapper">
+                                <button class="small-btn text-cyan" id="mic-permission-btn">ENABLE INPUT</button>
+                                <span class="small-btn-indicator" id="mic-status-indicator"></span>
+                            </div>
+                        </div>
+                        <div class="diag-item">
+                            <span class="diag-label">JAMMING EFFECTIVENESS</span>
+                            <span class="diag-val text-yellow" id="diag-jam-effect">0.0%</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RIGHT PANEL - TOP: REAL-TIME FREQUENCY SPECTROGRAM -->
+            <section class="panel-card spectrogram-panel">
+                <div class="panel-header">
+                    <h2>REAL-TIME FREQUENCY SPECTROGRAM</h2>
+                    <span class="panel-tag text-cyan">LIVE ANALYSER</span>
+                </div>
+                <div class="panel-body canvas-container">
+                    <canvas id="spectrogram-canvas"></canvas>
+                    <div class="spectrogram-axes-labels">
+                        <div class="frequency-ticks">
+                            <span>0 Hz</span>
+                            <span>4 kHz</span>
+                            <span>8 kHz</span>
+                            <span>12 kHz</span>
+                            <span>16 kHz</span>
+                            <span class="highlight-ultrasonic">18 kHz - 22 kHz (ULTRASONIC SHIELD BAND)</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RIGHT PANEL - MIDDLE: IoT NETWORK THREAT RADAR -->
+            <section class="panel-card radar-panel">
+                <div class="panel-header">
+                    <h2>IoT EAVESDROPPER RADAR</h2>
+                    <button class="small-scan-btn" id="radar-scan-btn">SCAN NETWORK</button>
+                </div>
+                <div class="panel-body flex-center-row position-relative">
+                    <div class="radar-viewport">
+                        <canvas id="radar-canvas"></canvas>
+                    </div>
+                    <div class="radar-device-details" id="radar-device-card">
+                        <div class="card-empty-state">
+                            <span class="pulse-ring">📡</span>
+                            <p>SCAN NETWORK TO MAP ACTIVE SMART DEVICES</p>
+                        </div>
+                        <div class="card-content hidden" id="device-card-content">
+                            <h3 id="device-card-name" class="text-magenta">AMAZON ECHO DOT</h3>
+                            <div class="device-meta-row">
+                                <span>THREAT LEVEL:</span>
+                                <span id="device-card-threat" class="badge threat-high">HIGH</span>
+                            </div>
+                            <div class="device-details-grid">
+                                <div>IP: <span id="device-card-ip">192.168.1.45</span></div>
+                                <div>MAC: <span id="device-card-mac">00:BB:3F:88:AC:2E</span></div>
+                                <div>SIGNAL: <span id="device-card-rssi">-64 dBm</span></div>
+                                <div>DISCOVERY: <span id="device-card-proto">mDNS (Bonjour)</span></div>
+                            </div>
+                            <div class="device-defense-status">
+                                <span class="defense-bar-label">ULTRA-JAM DEFENSE LEVEL</span>
+                                <div class="defense-bar-outer">
+                                    <div class="defense-bar-inner" id="device-card-jam-bar" style="width: 0%"></div>
+                                </div>
+                                <span class="defense-bar-pct text-cyan" id="device-card-jam-pct">0%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RIGHT PANEL - BOTTOM: GAN ADVERSARIAL TELEMETRY CONSOLE -->
+            <section class="panel-card console-panel">
+                <div class="panel-header">
+                    <h2>GAN ADVERSARIAL GENERATION TELEMETRY</h2>
+                    <span class="panel-tag text-magenta">TFLITE ENGINE CONSOLE</span>
+                </div>
+                <div class="panel-body console-body" id="console-terminal">
+                    <!-- Loaded dynamically via javascript -->
+                    <div class="console-line text-green">[INIT] WhisperMask adversarial engine loaded successfully.</div>
+                    <div class="console-line text-cyan">[INIT] Target models: Alexa Speech Engine, Google STT, Apple Siri ASR.</div>
+                    <div class="console-line">[READY] Standby. Tap ENGAGE to activate ultrasonic wave vector.</div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- INFO / GUIDES SECTION -->
+        <footer class="app-footer">
+            <div class="footer-grid">
+                <div class="footer-card">
+                    <h4>💡 How It Works</h4>
+                    <p>MEMS microphones in smart devices rely on internal hardware pre-amplifiers. WhisperMask emits near-ultrasonic wave profiles (19 kHz) that are inaudible to human ears but force the microphone's pre-amplifier to generate physical harmonic non-linearities in the audible spectrum, creating a chaotic "energy wall" that completely masks speech parameters inside the device's voice model.</p>
+                </div>
+                <div class="footer-card">
+                    <h4>📱 Mobile Phone Testing Instruction</h4>
+                    <p>Open this app directly on your phone! Since modern browsers enforce secure origins for microphone visualization, either run via <strong>localhost</strong> or check the console logs for your local Wi-Fi IP address. Connect your phone to the same Wi-Fi, open the local network link, and test. Note: <em>Ultrasonic emission (speakers) works on standard HTTP; only live visual feedback requires HTTPS/localhost.</em></p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 WHISPERMASK PRIVACY RESEARCH LABS. HACKATHON R&D DEVICE. DUAL-USE PRIVACY TOOL.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script type="module" src="js/audio-engine.js"></script>
+    <script type="module" src="js/spectrogram.js"></script>
+    <script type="module" src="js/radar.js"></script>
+    <script type="module" src="js/console.js"></script>
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
